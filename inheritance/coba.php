@@ -16,25 +16,34 @@ class Produk{
         // variable dalam parameter construct adalah variable lokal,
         // tugas nya untuk mendapatkan nilai dari parameter instansiasi object,
         // lalu mengganti property dengan nilai yang di dapatkan dari parameter instansiasi object.
-        public function __construct($camera, $recorder, $harga, $merk, $typeConnector, $typeCctv)
+        public function __construct($camera, $recorder, $harga, $merk)
         {
             // penggantian nilai property dalam class
             $this->camera = $camera;
             $this->recorder = $recorder; 
             $this->harga = $harga;
-            $this->merk = $merk;
-            $this->typeConnector = $typeConnector;
-            $this->typeCctv = $typeCctv;            
+            $this->merk = $merk;      
         }
         
         public function getInfoLengkap()
         {
-            $str = "{$this->typeCctv} - {$this->camera} - {$this->recorder} - {$this->harga} - {$this->merk} | ";
-            if ($this->typeCctv == "Analog") {
-                $str .= "Connector (BNC)";
-            }elseif ($this->typeCctv == "IP") {
-                $str .= "Connector (RJ45)";
-            }
+            $str = "{$this->camera} - {$this->recorder} - {$this->harga} - {$this->merk}";
+            return $str;
+        }
+    }
+
+    class IP extends GlobalProduk{
+        public function getInfoIp()
+        {
+            $str = "{$this->getInfoLengkap()} - RJ45 -  IP";
+            return $str;
+        }
+    }
+
+    class Analog extends GlobalProduk{
+        public function getInfoAnalog()
+        {
+            $str = "{$this->getInfoLengkap()} - BNC - Analog";
             return $str;
         }
     }
@@ -51,17 +60,17 @@ class Produk{
     }
     // instansiasi object, jika parameter di isi harus menggunakan functions __construct
     //  untuk memberi nilai dari parameter yang di isi.
-    $produk1 = new Produk("CHik001","RHik001",1000,"Hikvision","","Analog");
-    $produk2 = new Produk("CDha001","RDha001",1000,"Dahua","","IP");
+    $produk1 = new Analog("CHik001","RHik001",1000,"Hikvision");
+    $produk2 = new IP("CDha001","RDha001",1000,"Dahua");
     // Instansiasi objek cetak
-    $infoproduk = new CetakInforProduk();
+    // $infoproduk = new CetakInforProduk();
     // memanggil method cetak dan mengisi parameter dengan produk yang ingin di tampilkan
     // echo $infoproduk->cetak($produk1);
     // echo "<br>";
     // echo $infoproduk->cetak($produk2);
+    // echo "<br>";
+    echo $produk1->getInfoAnalog();
     echo "<br>";
-    echo $produk1->getInfoLengkap();
-    echo "<br>";
-    echo $produk2->getInfoLengkap();
+    echo $produk2->getInfoIp();
 
 ?>
