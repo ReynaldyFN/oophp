@@ -27,17 +27,6 @@ class Produk{
             $this->typeCctv = $typeCctv;            
         }
         
-        // method
-        public function katalog()
-        {
-            // this untuk mengambil property di dalam class,
-            // kalo tidak memakai this property yang dibuat didalam
-            // function adalah property baru.
-            return "$this->camera, 
-                    $this->recorder, 
-                    $this->harga";
-        }        
-
         public function getInfoLengkap()
         {
             $str = "{$this->typeCctv} - {$this->camera} - {$this->recorder} - {$this->harga} - {$this->merk} | ";
@@ -74,8 +63,5 @@ class Produk{
     echo $produk1->getInfoLengkap();
     echo "<br>";
     echo $produk2->getInfoLengkap();
-    
-    
-
 
 ?>
